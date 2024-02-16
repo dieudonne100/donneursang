@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "318620219033",
-    "firebase_url": "https://bloodsearch-b0dde-default-rtdb.firebaseio.com",
-    "project_id": "bloodsearch-b0dde",
-    "storage_bucket": "bloodsearch-b0dde.appspot.com"
+    "project_number": "503142718676",
+    "project_id": "blood-donnation",
+    "storage_bucket": "blood-donnation.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:318620219033:android:e1bcfdaed9b159595a6a08",
+        "mobilesdk_app_id": "1:503142718676:android:b8a2c14f79f0313ffe2f41",
         "android_client_info": {
           "package_name": "com.example.donneursang"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBx0zeg0NOPprQUcvlGg7RTK6KO2AfE_NM"
+          "current_key": "AIzaSyC4ATvJQCDeOT-gWeGK18qnngma3f1j_2M"
         }
       ],
       "services": {
