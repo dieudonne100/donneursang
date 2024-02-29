@@ -44,42 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC1sR3u6WP7XVngeS04aL4MfucLwMjl1us',
-    appId: '1:318620219033:web:f1d8ef769e77ddfb5a6a08',
-    messagingSenderId: '318620219033',
-    projectId: 'bloodsearch-b0dde',
-    authDomain: 'bloodsearch-b0dde.firebaseapp.com',
-    databaseURL: 'https://bloodsearch-b0dde-default-rtdb.firebaseio.com',
-    storageBucket: 'bloodsearch-b0dde.appspot.com',
-    measurementId: 'G-Z8PTVTC0HK',
+    apiKey: 'AIzaSyAvs8OgbIWT0GjlY9_-V-rqDRGBriBgW-w',
+    appId: '1:503142718676:web:2b9133c0334f8d2efe2f41',
+    messagingSenderId: '503142718676',
+    projectId: 'blood-donnation',
+    authDomain: 'blood-donnation.firebaseapp.com',
+    storageBucket: 'blood-donnation.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBx0zeg0NOPprQUcvlGg7RTK6KO2AfE_NM',
-    appId: '1:318620219033:android:e1bcfdaed9b159595a6a08',
-    messagingSenderId: '318620219033',
-    projectId: 'bloodsearch-b0dde',
-    databaseURL: 'https://bloodsearch-b0dde-default-rtdb.firebaseio.com',
-    storageBucket: 'bloodsearch-b0dde.appspot.com',
+    apiKey: 'AIzaSyC4ATvJQCDeOT-gWeGK18qnngma3f1j_2M',
+    appId: '1:503142718676:android:b8a2c14f79f0313ffe2f41',
+    messagingSenderId: '503142718676',
+    projectId: 'blood-donnation',
+    storageBucket: 'blood-donnation.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCv_UOtOUZoATrEheer6ZU8n66RPzxTN6U',
-    appId: '1:318620219033:ios:fcc708d3e74b5c705a6a08',
-    messagingSenderId: '318620219033',
-    projectId: 'bloodsearch-b0dde',
-    databaseURL: 'https://bloodsearch-b0dde-default-rtdb.firebaseio.com',
-    storageBucket: 'bloodsearch-b0dde.appspot.com',
+    apiKey: 'AIzaSyAuhJh5QVI1iSCFctMcYJIjEvu2Iooz3gA',
+    appId: '1:503142718676:ios:c732ccede28f0977fe2f41',
+    messagingSenderId: '503142718676',
+    projectId: 'blood-donnation',
+    storageBucket: 'blood-donnation.appspot.com',
     iosBundleId: 'com.example.donneursang',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCv_UOtOUZoATrEheer6ZU8n66RPzxTN6U',
-    appId: '1:318620219033:ios:7827673c169808715a6a08',
-    messagingSenderId: '318620219033',
-    projectId: 'bloodsearch-b0dde',
-    databaseURL: 'https://bloodsearch-b0dde-default-rtdb.firebaseio.com',
-    storageBucket: 'bloodsearch-b0dde.appspot.com',
+    apiKey: 'AIzaSyAuhJh5QVI1iSCFctMcYJIjEvu2Iooz3gA',
+    appId: '1:503142718676:ios:2a1963aed6643980fe2f41',
+    messagingSenderId: '503142718676',
+    projectId: 'blood-donnation',
+    storageBucket: 'blood-donnation.appspot.com',
     iosBundleId: 'com.example.donneursang.RunnerTests',
   );
 }

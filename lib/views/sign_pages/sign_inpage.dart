@@ -1,6 +1,6 @@
 import 'package:donneursang/core/commons/button.dart';
 import 'package:donneursang/core/commons/footer.dart';
-import 'package:donneursang/views/sign_pages/signup_page.dart';
+import 'package:donneursang/views/auth/pages/login_page.dart';
 import 'package:donneursang/views/sign_pages/widgets/forgot_pwd_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -153,10 +153,8 @@ class _SignInPageState extends State<SignInPage> {
       const Gap(50),
       InkWell(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const BottomBar()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const BottomBar()));
           },
           child: button(
             backgroundColor: kPrimaryColor,
@@ -169,10 +167,8 @@ class _SignInPageState extends State<SignInPage> {
           const Text('Already have an account?'),
           TextButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SignUpPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
               },
               child: const Text(
                 'Sign Up',

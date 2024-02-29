@@ -9,24 +9,42 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.6
   google_fonts: ^6.1.0
   flutter_svg: ^2.0.9
-  intl_phone_field: ^3.1.0
+  intl_phone_field: ^3.2.0
   gap: ^3.0.1
-  pinput: ^3.0.1
+  pinput: ^4.0.0
   fluttertoast: ^8.2.4
   carousel_slider: ^4.2.1
   stylish_bottom_bar: ^1.0.3
-  flutter_platform_widgets: ^6.0.2
+  flutter_platform_widgets: ^6.1.0
   firebase_core: ^2.25.4
+  cached_network_image: ^3.3.1
+  image_picker: ^1.0.7
+  firebase_storage: ^11.6.5
+  flutter_rounded_date_picker: ^3.0.4
+  cloud_firestore: ^4.15.4
+  firebase_auth: ^4.17.4
+  flutter_riverpod: ^2.4.10
+  country_picker: ^2.0.24
+  firebase_app_check: ^0.2.1+13
+  photo_manager: ^3.0.0-dev.2
+  flutter_contacts: ^1.1.7+1
+  url_launcher: ^6.2.4
+  firebase_database: ^10.4.5
+  page_transition: ^2.1.0
+  intl: ^0.19.0
+  uuid: ^4.3.3
+  custom_clippers: ^2.0.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 
 flutter:
