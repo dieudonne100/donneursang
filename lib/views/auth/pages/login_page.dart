@@ -1,12 +1,13 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:donneursang/core/common/helper/show_alert_dialog.dart';
-import 'package:donneursang/core/common/widgets/custom_elevated_button.dart';
 import 'package:donneursang/core/common/widgets/custom_icon_button.dart';
+import 'package:donneursang/core/commons/custom_button.dart';
 import 'package:donneursang/core/constants/themes.dart';
 import 'package:donneursang/views/auth/controller/auth_controller.dart';
 import 'package:donneursang/views/auth/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -19,6 +20,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   late TextEditingController countryNameController;
   late TextEditingController countryCodeController;
   late TextEditingController phoneNumberController;
+  bool isLoading = false;
 
   sendCodeToPhone() {
     final phoneNumber = phoneNumberController.text;
@@ -87,12 +89,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     );
   }
 
+  iniCountry() async {
+    final preferences = await SharedPreferences.getInstance();
+    countryNameController =
+        TextEditingController(text: preferences.getString("country"));
+    countryCodeController = TextEditingController(text: "237");
+    phoneNumberController = TextEditingController();
+    setState(() {});
+  }
+
   @override
   void initState() {
-    countryNameController = TextEditingController(text: 'Ethiopia');
-    countryCodeController = TextEditingController(text: '251');
-    phoneNumberController = TextEditingController();
     super.initState();
+    iniCountry();
   }
 
   @override
@@ -130,7 +139,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             child: RichText(
               textAlign: TextAlign.center,
               text: const TextSpan(
-                text: 'WhatsApp will need to verify your number. ',
+                text: 'Dare To Donate will need to verify your number. ',
                 style: TextStyle(
                   color: Colors.grey,
                   height: 1.5,
@@ -196,10 +205,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: CustomElevatedButton(
-        onPressed: sendCodeToPhone,
-        text: 'NEXT',
-        buttonWidth: 90,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(16),
+        child: CustomButton(
+          isFullWidth: true,
+          onPressed: sendCodeToPhone,
+          text: 'NEXT',
+        ),
       ),
     );
   }

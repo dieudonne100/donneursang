@@ -10,18 +10,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  if (!kDebugMode) {
-    await FirebaseAppCheck.instance.activate(
-      androidProvider: AndroidProvider.playIntegrity,
-      appleProvider: AppleProvider.appAttest,
-      webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
-    );
-  } else {
-    await FirebaseAppCheck.instance.activate(
-      androidProvider: AndroidProvider.debug,
-      appleProvider: AppleProvider.debug,
-    );
-  }
+  // if (!kDebugMode) {
+  //   await FirebaseAppCheck.instance.activate(
+  //     androidProvider: AndroidProvider.playIntegrity,
+  //     appleProvider: AppleProvider.appAttest,
+  //     webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
+  //   );
+  // } else {
+  //   await FirebaseAppCheck.instance.activate(
+  //     androidProvider: AndroidProvider.debug,
+  //     appleProvider: AppleProvider.debug,
+  //   );
+  // }
 
   runApp(const ProviderScope(child: MyApp()));
 }

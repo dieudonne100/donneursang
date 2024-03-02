@@ -16,7 +16,7 @@ class SignUpForm extends StatefulWidget {
   final TextEditingController stateController;
   final TextEditingController bloodGroupController;
   final TextEditingController genderController;
-  final bool? bloodDonor;
+  // final bool? bloodDonor;
   final DateTime date;
   const SignUpForm(
       {super.key,
@@ -29,7 +29,7 @@ class SignUpForm extends StatefulWidget {
       required this.stateController,
       required this.bloodGroupController,
       required this.genderController,
-      this.bloodDonor,
+      // this.bloodDonor,
       required this.date});
 
   @override
@@ -181,9 +181,7 @@ class _SignUpFormState extends State<SignUpForm> {
             },
             hint: "Localisation",
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Champ obligatoire";
-              }
+              if (value == null || value.isEmpty) return 'City is required';
             },
           ),
         ),

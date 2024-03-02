@@ -75,7 +75,13 @@ class AuthRepository {
   }
 
   void saveUserInfoToFirestore({
-    required String username,
+    required String email,
+    required String pass,
+    required String fname,
+    required String city,
+    required String bloodGroup,
+    required String gender,
+    required bool state,
     required var profileImage,
     required ProviderRef ref,
     required BuildContext context,
@@ -95,13 +101,18 @@ class AuthRepository {
       }
 
       UserModel user = UserModel(
-        username: username,
+        fname: fname,
+        email: email,
+        pass: pass,
+        city: city,
+        statedonne: state,
+        gender: gender,
+        bloodGroup: bloodGroup,
         uid: uid,
         profileImageUrl: profileImageUrl,
         active: true,
         lastSeen: DateTime.now().millisecondsSinceEpoch,
         phoneNumber: auth.currentUser!.phoneNumber!,
-        groupId: [],
       );
 
       await firestore.collection('users').doc(uid).set(user.toMap());

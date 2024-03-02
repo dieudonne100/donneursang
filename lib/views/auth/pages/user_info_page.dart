@@ -3,16 +3,17 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:donneursang/core/common/helper/show_alert_dialog.dart';
-import 'package:donneursang/core/common/widgets/custom_elevated_button.dart';
 import 'package:donneursang/core/common/widgets/custom_icon_button.dart';
 import 'package:donneursang/core/common/widgets/short_h_bar.dart';
+import 'package:donneursang/core/commons/custom_button.dart';
+import 'package:donneursang/core/commons/sign_up_form.dart';
 import 'package:donneursang/core/constants/themes.dart';
 import 'package:donneursang/views/auth/controller/auth_controller.dart';
 import 'package:donneursang/views/auth/pages/image_picker_page.dart';
-import 'package:donneursang/views/auth/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserInfoPage extends ConsumerStatefulWidget {
   const UserInfoPage({super.key, this.profileImageUrl});
@@ -28,15 +29,24 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
   Uint8List? imageGallery;
 
   late TextEditingController usernameController;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController stateController = TextEditingController();
+  TextEditingController bloodGroupController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
 
-  saveUserDataToFirebase() {
-    String username = usernameController.text;
-    if (username.isEmpty) {
+  saveUserDataToFirebase() async {
+    // final preferences = await SharedPreferences.getInstance();
+
+    if (usernameController.text.isEmpty) {
       return showAlertDialog(
         context: context,
         message: 'Please provide a username',
       );
-    } else if (username.length < 3 || username.length > 20) {
+    } else if (usernameController.text.length < 3 ||
+        usernameController.text.length > 20) {
       return showAlertDialog(
         context: context,
         message: 'A username length should be between 3-20',
@@ -44,7 +54,14 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
     }
 
     ref.read(authControllerProvider).saveUserInfoToFirestore(
-          username: username,
+          username: usernameController.text,
+          email: emailController.text,
+          pass: passController.text,
+          gender: genderController.text,
+          bloodGroup: bloodGroupController.text,
+          city: "",
+          fname: usernameController.text,
+          state: false,
           profileImage:
               imageCamera ?? imageGallery ?? widget.profileImageUrl ?? '',
           context: context,
@@ -239,34 +256,35 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
               ),
             ),
             const SizedBox(height: 40),
-            Row(
-              children: [
-                const SizedBox(width: 20),
-                Expanded(
-                  child: CustomTextField(
-                    controller: usernameController,
-                    hintText: 'Type your name here',
-                    textAlign: TextAlign.start,
-                    autoFocus: true,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                const Icon(
-                  Icons.emoji_emotions_outlined,
-                  color: kPrimaryColor,
-                ),
-                const SizedBox(width: 10),
-              ],
+            SignUpForm(
+              onEdit: () {
+                setState(() {});
+              },
+              emailController: emailController,
+              passController: passController,
+              fnameController: usernameController,
+              phoneController: phoneController,
+              cityController: cityController,
+              stateController: stateController,
+              bloodGroupController: bloodGroupController,
+              genderController: genderController,
+              date: DateTime.now(),
             ),
+            const SizedBox(height: 40),
+            CustomButton(
+              isFullWidth: true,
+              onPressed: saveUserDataToFirebase,
+              text: 'NEXT',
+            )
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: CustomElevatedButton(
-        onPressed: saveUserDataToFirebase,
-        text: 'NEXT',
-        buttonWidth: 90,
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: CustomElevatedButton(
+      //   onPressed: saveUserDataToFirebase,
+      //   text: 'NEXT',
+      //   buttonWidth: 90,
+      // ),
     );
   }
 }

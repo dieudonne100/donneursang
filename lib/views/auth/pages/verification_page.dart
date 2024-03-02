@@ -55,14 +55,14 @@ class VerificationPage extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: RichText(
                 textAlign: TextAlign.center,
-                text: const TextSpan(
-                  style: TextStyle(color: Colors.grey),
+                text: TextSpan(
+                  style: const TextStyle(color: Colors.grey),
                   children: [
                     TextSpan(
                       text:
-                          "You've tried to register +251935838471. before requesting an SMS or Call with your code.",
+                          "You've tried to register $phoneNumber. before requesting an SMS or Call with your code.",
                     ),
-                    TextSpan(
+                    const TextSpan(
                       text: "Wrong number?",
                       style: TextStyle(
                         color: Colors.blue,

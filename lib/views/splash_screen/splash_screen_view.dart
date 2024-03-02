@@ -1,17 +1,18 @@
+import 'package:donneursang/views/splash_screen/controllers/splash_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
 import '../../core/constants/themes.dart';
-import '../onboarding/onboardings_page.dart';
 
-class SplashscreenView extends StatefulWidget {
+class SplashscreenView extends ConsumerStatefulWidget {
   const SplashscreenView({super.key});
 
   @override
-  State<SplashscreenView> createState() => _SplashscreenViewState();
+  ConsumerState<SplashscreenView> createState() => _SplashscreenViewState();
 }
 
-class _SplashscreenViewState extends State<SplashscreenView>
+class _SplashscreenViewState extends ConsumerState<SplashscreenView>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacityTween;
@@ -28,11 +29,8 @@ class _SplashscreenViewState extends State<SplashscreenView>
     _opacityTween = Tween<double>(begin: 0.0, end: 2.0).animate(_controller);
 
     _controller.forward();
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const OnboardingPage()),
-      );
+    Future.delayed(const Duration(seconds: 5), () async {
+      await ref.read(splashControllerProvider).getPositionAfterLoad(context);
     });
   }
 
@@ -63,7 +61,7 @@ class _SplashscreenViewState extends State<SplashscreenView>
                         color: kWhiteColor,
                         fontWeight: FontWeight.w800),
                   ),
-                   const Gap(136),
+                  const Gap(136),
                 ],
               ),
             ),
