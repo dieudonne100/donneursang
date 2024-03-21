@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
+  final bool readOnly;
   final void Function(String)? onChanged;
+  final void Function()? onTap;
   final String? Function(String? phone)? validator;
   final TextStyle? style;
   final String? hint;
@@ -17,7 +19,7 @@ class CustomTextField extends StatelessWidget {
   final bool hasDecoration;
 
   const CustomTextField(
-      {Key? key,
+      {super.key,
       this.controller,
       this.suffix,
       this.onChanged,
@@ -29,43 +31,56 @@ class CustomTextField extends StatelessWidget {
       this.hintStyle,
       this.keyboardType,
       this.inputFormatters,
-      this.hasDecoration = true})
-      : super(key: key);
+      this.hasDecoration = true,
+      this.readOnly = false,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      inputFormatters: inputFormatters,
-      onChanged: onChanged,
-      keyboardType: keyboardType,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      enabled: enabled,
-      validator: validator,
-      style: style,
-      focusNode: focusNode,
-      decoration: InputDecoration(
-        suffixIcon: suffix,
-        suffixIconConstraints: const BoxConstraints(),
-        hintText: hint,
-        hintStyle: hintStyle,
-        border: hasDecoration
-            ? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(
-                  color: Color.fromRGBO(221, 218, 218, 1),
-                ),
-              )
-            : InputBorder.none,
-        focusedBorder: hasDecoration
-            ? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: const BorderSide(
-                  color: kPrimaryColor,
-                  width: 1.0,
-                ),
-              )
-            : InputBorder.none,
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: kPrimaryColor.withOpacity(0.03),
+      ),
+      child: TextFormField(
+        onTap: onTap,
+        readOnly: readOnly,
+        controller: controller,
+        inputFormatters: inputFormatters,
+        onChanged: onChanged,
+        keyboardType: keyboardType,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        enabled: enabled,
+        validator: validator,
+        style: style,
+        focusNode: focusNode,
+        decoration: InputDecoration(
+          suffixIcon: suffix,
+          hintText: hint,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: const BorderSide(
+              width: 0,
+              color: Color.fromRGBO(221, 218, 218, 1),
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: const BorderSide(
+                color: kPrimaryColor,
+              )),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: const BorderSide(
+                color: kPrimaryColor,
+              )),
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: const BorderSide(
+                color: kPrimaryColor,
+              )),
+        ),
       ),
     );
   }

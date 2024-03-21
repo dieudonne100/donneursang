@@ -8,7 +8,7 @@ import '../../core/commons/text_field_input.dart';
 import '../../core/constants/themes.dart';
 
 class RequestPage extends StatefulWidget {
-  const RequestPage({Key? key}) : super(key: key);
+  const RequestPage({super.key});
 
   @override
   State<RequestPage> createState() => _RequestPageState();
@@ -33,7 +33,7 @@ class _RequestPageState extends State<RequestPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal:16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Form(
           key: formKey,
           child: Column(

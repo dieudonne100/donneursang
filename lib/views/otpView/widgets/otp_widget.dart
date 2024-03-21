@@ -4,28 +4,32 @@ import 'package:donneursang/core/constants/themes.dart';
 import 'package:donneursang/views/success/success_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
-class OtpWidget extends StatefulWidget {
+import '../../auth/controller/login_controller.dart';
+
+class OtpWidget extends ConsumerStatefulWidget {
   final void Function(String)? onChanged;
 
   const OtpWidget({super.key, this.onChanged});
 
   @override
-  State<OtpWidget> createState() => _OtpWidgetState();
+  ConsumerState<OtpWidget> createState() => _OtpWidgetState();
 }
 
-class _OtpWidgetState extends State<OtpWidget> {
-  final TextEditingController pinkCodeController = TextEditingController();
+class _OtpWidgetState extends ConsumerState<OtpWidget> {
   bool showLoader = false;
   bool showSuccess = false;
   bool isCheck = false;
 
   @override
   Widget build(BuildContext context) {
+    var loginController = ref.read(loginControllerProvider);
+
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.only(
@@ -53,7 +57,7 @@ class _OtpWidgetState extends State<OtpWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Pinput(
-                                controller: pinkCodeController,
+                                controller: loginController.otpController,
                                 onChanged: widget.onChanged,
                                 autofocus: true,
                                 length: 4,
@@ -102,7 +106,7 @@ class _OtpWidgetState extends State<OtpWidget> {
                                     border: Border.all(
                                         width: 2,
                                         color:
-                                            pinkCodeController.text.length != 4
+                                        loginController.otpController.text.length != 4
                                                 ? Colors.red
                                                 : kBlackColor),
                                     borderRadius: BorderRadius.circular(8),
@@ -118,7 +122,7 @@ class _OtpWidgetState extends State<OtpWidget> {
                                   ),
                                 ),
                                 validator: (_) {
-                                  if (pinkCodeController.text.length == 4) {
+                                  if (loginController.otpController.text.length == 4) {
                                     setState(() {
                                       showLoader = true;
                                     });

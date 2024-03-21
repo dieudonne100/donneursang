@@ -1,15 +1,17 @@
 import 'package:donneursang/core/constants/themes.dart';
-import 'package:donneursang/views/onboarding/onboarding3_page.dart';
+import 'package:donneursang/core/providers/providers.dart';
+import 'package:donneursang/main.dart';
 import 'package:donneursang/views/onboarding/widgets/dot_indicator.dart';
 import 'package:donneursang/views/onboarding/widgets/onboarding_widget.dart';
+import 'package:donneursang/views/sign_pages/sign_inpage.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/onboarding_data.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<OnboardingPage> createState() => _OnboardingPageState();
@@ -34,6 +36,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final pref = container.read(sharedPreferencesProvider);
     return Scaffold(
         body: Column(
       children: [
@@ -72,10 +75,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
               TextButton(
                 onPressed: () {
                   if (_pageIndex == 1) {
+                    pref.setBool("isFirstRun", true);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const OnboardingPage3()));
+                            builder: (context) => const SignInPage()));
                   } else if (_pageIndex < 2) {
                     _pageController.nextPage(
                         duration: const Duration(milliseconds: 300),

@@ -1,5 +1,6 @@
-import 'package:donneursang/models/contain_model.dart';
+import 'package:donneursang/core/common/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/commons/contain_widget.dart';
 
@@ -11,6 +12,22 @@ class DonationView extends StatefulWidget {
 }
 
 class _DonationViewState extends State<DonationView> {
+  List<UserModel> donorUser = [];
+  final supabase = Supabase.instance.client;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  fetchData() async {
+    var data =
+        await supabase.from('users').select().filter("isdonor", "eq", true);
+    donorUser = data.map((e) => UserModel.fromMap(e)).toList();
+    print(donorUser);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +48,11 @@ class _DonationViewState extends State<DonationView> {
             padding: const EdgeInsets.all(16.0),
             child: ListView.separated(
               scrollDirection: Axis.vertical,
-              itemCount: containItems.length,
+              itemCount: donorUser.length,
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return ContainWidget(contain: containItems[index]);
+                return ContainWidget(userModel: donorUser[index]);
               },
               separatorBuilder: (_, __) {
                 return const SizedBox(

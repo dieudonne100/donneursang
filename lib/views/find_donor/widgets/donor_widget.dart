@@ -1,11 +1,12 @@
+import 'package:donneursang/core/common/models/user.dart';
 import 'package:donneursang/core/constants/themes.dart';
-import 'package:donneursang/data/donor_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class DonorWidget extends StatelessWidget {
-  final Donor donor;
-  const DonorWidget({Key? key, required this.donor}) : super(key: key);
+  final UserModel userModel;
+  const DonorWidget({super.key, required this.userModel});
 
   @override
   Widget build(BuildContext context) {
@@ -25,50 +26,54 @@ class DonorWidget extends StatelessWidget {
           ]),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          userModel.avatarPath != null
+              ? Image.network(Supabase.instance.client.storage
+                  .from('usersImages')
+                  .getPublicUrl(userModel.avatarPath!))
+              : Image.asset("assets/images/emptyprofil.png"),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(donor.startimage),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Text(
+                "${userModel.firstNname} ${userModel.lastNname}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Poppins",
+                    fontSize: 18),
+              ),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  const Icon(
+                    Icons.location_on,
+                    size: 24,
+                    color: kPrimaryColor,
+                  ),
                   Text(
-                    donor.title,
+                    "${userModel.cordonate.locality} ${userModel.cordonate.country}",
                     textAlign: TextAlign.start,
                     style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "Poppins",
-                        fontSize: 18),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(
-                        donor.icon,
-                        size: 24,
-                        color: kPrimaryColor,
-                      ),
-                      Text(
-                        donor.subtitle,
-                        textAlign: TextAlign.start,
-                        style: const TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w300,
-                            fontSize: 15,
-                            fontFamily: "Poppins"),
-                      ),
-                    ],
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 15,
+                        fontFamily: "Poppins"),
                   ),
                 ],
               ),
-              SvgPicture.asset(
-                donor.image,
-                width: 30,
-              ),
             ],
           ),
+          SvgPicture.asset(
+            "assets/images/b-.svg",
+            width: 30,
+          ),
+        ],
+      ),
     );
   }
 }

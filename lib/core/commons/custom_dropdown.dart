@@ -1,53 +1,81 @@
 import 'package:donneursang/core/constants/themes.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropdown extends StatelessWidget {
-  final String? hint;
-  final String? value;
-  final void Function(String?)? onChanged;
-  final List<String> items;
+class CustomDropdown<T> extends StatelessWidget {
+  final String? title;
+  final List<T> options;
+  final String hint;
+  final void Function(T?)? onChanged;
+  final T? value;
+  final double borderRadius;
+  final String Function(T)? dropDownMenuText;
 
   const CustomDropdown(
-      {Key? key, this.hint, this.value, this.onChanged, required this.items})
-      : super(key: key);
+      {super.key,
+      required this.options,
+      this.title,
+      required this.hint,
+      this.onChanged,
+      this.value,
+      this.borderRadius = 8,
+      this.dropDownMenuText});
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonHideUnderline(
-      child: ButtonTheme(
-        alignedDropdown: true,
-        child: DropdownButtonFormField<String>(
-          items: items.map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
-                style: const TextStyle(fontSize: 14),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (title != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Text(
+              title!,
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+            ),
+          ),
+        ClipRRect(
+            borderRadius: BorderRadius.circular(borderRadius),
+            child: SizedBox(
+              width: double.infinity,
+              child: DropdownButtonHideUnderline(
+                child: ButtonTheme(
+                  alignedDropdown: true,
+                  child: DropdownButtonFormField(
+                    items: dropDownMenuText == null
+                        ? null
+                        : options
+                            .map((T e) => DropdownMenuItem(
+                                  value: e,
+                                  child: Text(
+                                    dropDownMenuText!(e),
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ))
+                            .toList(),
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: kPrimaryColor.withOpacity(0.05),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 20),
+                        border: InputBorder.none),
+                    value: value,
+                    isExpanded: true,
+                    borderRadius: BorderRadius.circular(8),
+                    hint: Text(
+                      hint,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          fontStyle: FontStyle.italic),
+                    ),
+                    onChanged: onChanged,
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                  ),
+                ),
               ),
-            );
-          }).toList(),
-          value: value,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(
-              hintText: hint,
-              contentPadding: const EdgeInsets.symmetric(vertical: 17),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(width: 2, color: kPrimaryColor),
-                  borderRadius: BorderRadius.circular(8)),
-              border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(8))),
-          hint: hint == null ? null : Text(hint!),
-          validator: (value) {
-            if (value == null) {
-              return "Required";
-            } else {
-              return null;
-            }
-          },
-          onChanged: onChanged,
-        ),
-      ),
+            )),
+      ],
     );
   }
 }

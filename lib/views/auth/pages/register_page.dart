@@ -3,29 +3,29 @@ import 'package:donneursang/core/common/helper/show_alert_dialog.dart';
 import 'package:donneursang/core/common/widgets/custom_icon_button.dart';
 import 'package:donneursang/core/commons/custom_button.dart';
 import 'package:donneursang/core/constants/themes.dart';
-import 'package:donneursang/views/auth/controller/auth_controller.dart';
+import 'package:donneursang/views/auth/controller/login_controller.dart';
 import 'package:donneursang/views/auth/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends ConsumerStatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  ConsumerState<LoginPage> createState() => _LoginPageState();
+  ConsumerState<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
+class _SignUpPageState extends ConsumerState<SignUpPage> {
   late TextEditingController countryNameController;
   late TextEditingController countryCodeController;
-  late TextEditingController phoneNumberController;
   bool isLoading = false;
 
   sendCodeToPhone() {
-    final phoneNumber = phoneNumberController.text;
+    var loginController = ref.watch(loginControllerProvider);
+
+    final phoneNumber = loginController.phoneController.text;
     final countryName = countryNameController.text;
-    final countryCode = countryCodeController.text;
 
     if (phoneNumber.isEmpty) {
       return showAlertDialog(
@@ -46,9 +46,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       );
     }
 
-    ref.read(authControllerProvider).sendSmsCode(
-          context: context,
-          phoneNumber: "+$countryCode$phoneNumber",
+    ref.read(loginControllerProvider).signInWithPhone(
+          context,
         );
   }
 
@@ -94,7 +93,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     countryNameController =
         TextEditingController(text: preferences.getString("country"));
     countryCodeController = TextEditingController(text: "237");
-    phoneNumberController = TextEditingController();
     setState(() {});
   }
 
@@ -108,12 +106,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   void dispose() {
     countryNameController.dispose();
     countryCodeController.dispose();
-    phoneNumberController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    var loginController = ref.watch(loginControllerProvider);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -186,7 +185,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 const SizedBox(width: 10),
                 Expanded(
                   child: CustomTextField(
-                    controller: phoneNumberController,
+                    controller: loginController.phoneController,
+                    onChanged: (_) {
+                      setState(() {});
+                    },
                     hintText: 'phone number',
                     textAlign: TextAlign.left,
                     keyboardType: TextInputType.number,
@@ -210,7 +212,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         child: CustomButton(
           isFullWidth: true,
           onPressed: sendCodeToPhone,
-          text: 'NEXT',
+          text: 'VERIFY',
         ),
       ),
     );

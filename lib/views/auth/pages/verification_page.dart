@@ -1,5 +1,5 @@
 import 'package:donneursang/core/common/widgets/custom_icon_button.dart';
-import 'package:donneursang/views/auth/controller/auth_controller.dart';
+import 'package:donneursang/views/auth/controller/login_controller.dart';
 import 'package:donneursang/views/auth/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,28 +7,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class VerificationPage extends ConsumerWidget {
   const VerificationPage({
     super.key,
-    required this.smsCodeId,
     required this.phoneNumber,
   });
 
-  final String smsCodeId;
   final String phoneNumber;
-
-  void verifySmsCode(
-    BuildContext context,
-    WidgetRef ref,
-    String smsCode,
-  ) {
-    ref.read(authControllerProvider).verifySmsCode(
-          context: context,
-          smsCodeId: smsCodeId,
-          smsCode: smsCode,
-          mounted: true,
-        );
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var loginController = ref.watch(loginControllerProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -79,10 +65,13 @@ class VerificationPage extends ConsumerWidget {
                 hintText: "- - -  - - -",
                 fontSize: 30,
                 autoFocus: true,
+                controller: loginController.otpController,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   if (value.length == 6) {
-                    return verifySmsCode(context, ref, value);
+                    return ref.read(loginControllerProvider).verifyOTP(
+                          context,
+                        );
                   }
                 },
               ),

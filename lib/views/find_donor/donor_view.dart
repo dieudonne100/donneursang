@@ -1,16 +1,17 @@
-import 'package:donneursang/models/donor_model.dart';
 import 'package:donneursang/views/find_donor/widgets/donor_widget.dart';
+import 'package:donneursang/views/home/controller/home_controller.dart';
 import 'package:donneursang/views/search/widgets/searchbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DonorView extends StatefulWidget {
+class DonorView extends ConsumerStatefulWidget {
   const DonorView({super.key});
 
   @override
-  State<DonorView> createState() => _DonorViewState();
+  ConsumerState<DonorView> createState() => _DonorViewState();
 }
 
-class _DonorViewState extends State<DonorView> {
+class _DonorViewState extends ConsumerState<DonorView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,22 +30,32 @@ class _DonorViewState extends State<DonorView> {
         child: Column(
           children: [
             const SearchBarWidget(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ListView.separated(
-                scrollDirection: Axis.vertical,
-                itemCount: donorItems.length,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return DonorWidget(donor: donorItems[index]);
-                },
-                separatorBuilder: (_, __) {
-                  return const SizedBox(
-                    height: 12,
-                  );
-                },
-              ),
+            ref.watch(getIsdoneActivateProvider).when(
+              data: (data) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: ListView.separated(
+                    scrollDirection: Axis.vertical,
+                    itemCount: data.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return DonorWidget(userModel: data[index]);
+                    },
+                    separatorBuilder: (_, __) {
+                      return const SizedBox(
+                        height: 12,
+                      );
+                    },
+                  ),
+                );
+              },
+              error: (error, stackTrace) {
+                return const SizedBox();
+              },
+              loading: () {
+                return const SizedBox();
+              },
             )
           ],
         ),

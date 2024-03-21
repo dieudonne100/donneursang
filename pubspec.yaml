@@ -41,6 +41,10 @@ dependencies:
   geolocator: ^11.0.0
   shared_preferences: ^2.2.2
   geocoding: ^2.2.0
+  supabase_flutter: ^2.3.4
+  file_picker: ^8.0.0+1
+  flutter_datetime_picker_plus: ^2.1.0
+  timeago: ^3.6.1
 
 dev_dependencies:
   flutter_test:

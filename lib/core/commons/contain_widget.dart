@@ -1,15 +1,20 @@
+import 'package:donneursang/core/common/models/user.dart';
 import 'package:donneursang/core/constants/themes.dart';
-import 'package:donneursang/data/contain_class.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:gap/gap.dart';
 
 class ContainWidget extends StatelessWidget {
-  final Contain contain;
-  const ContainWidget({Key? key, required this.contain}) : super(key: key);
+  final UserModel userModel;
+  const ContainWidget({super.key, required this.userModel});
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = DateTime.parse(userModel.createdAt.toString());
+
+    int minute = dateTime.minute;
+    final fifteenAgo = DateTime.now().subtract(Duration(minutes: minute));
     return Container(
       padding: const EdgeInsets.all(12),
       height: 130,
@@ -34,7 +39,7 @@ class ContainWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    contain.title1,
+                    "${userModel.firstNname} ${userModel.lastNname}",
                     textAlign: TextAlign.start,
                     style: const TextStyle(
                         color: Colors.black,
@@ -44,13 +49,13 @@ class ContainWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(
-                        contain.icon,
+                      const Icon(
+                        Icons.location_on,
                         size: 24,
                         color: kPrimaryColor,
                       ),
                       Text(
-                        contain.title2,
+                        "${userModel.cordonate.locality} ${userModel.cordonate.country}",
                         textAlign: TextAlign.start,
                         style: const TextStyle(
                             color: Colors.black54,
@@ -73,7 +78,7 @@ class ContainWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                contain.temps,
+                timeago.format(fifteenAgo),
                 textAlign: TextAlign.start,
                 style: const TextStyle(
                     color: Colors.black38,
@@ -81,10 +86,10 @@ class ContainWidget extends StatelessWidget {
                     fontFamily: "Poppins",
                     fontSize: 12),
               ),
-              Text(
-                contain.titre,
+              const Text(
+                "Donate",
                 textAlign: TextAlign.start,
-                style: const TextStyle(
+                style: TextStyle(
                     color: kPrimaryColor,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.w600,

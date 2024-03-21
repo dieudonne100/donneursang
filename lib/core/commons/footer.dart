@@ -10,8 +10,8 @@ import '../constants/themes.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<BottomBar> createState() => _BottomBarState();
@@ -119,11 +119,9 @@ class _BottomBarState extends State<BottomBar> {
         backgroundColor: kPrimaryColor,
         child: IconButton(
           onPressed: () {
-          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const RequestPage()));
-                        },
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const RequestPage()));
+          },
           icon: const Icon(
             Icons.bloodtype_outlined,
             color: kWhiteColor,
