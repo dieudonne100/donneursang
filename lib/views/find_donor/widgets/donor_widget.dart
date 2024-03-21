@@ -32,7 +32,8 @@ class DonorWidget extends StatelessWidget {
               ? Image.network(Supabase.instance.client.storage
                   .from('usersImages')
                   .getPublicUrl(userModel.avatarPath!))
-              : Image.asset("assets/images/emptyprofil.png"),
+              :
+          Image.asset("assets/images/emptyprofil.png"),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
