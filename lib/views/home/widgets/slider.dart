@@ -3,6 +3,7 @@ import 'package:donneursang/core/constants/themes.dart';
 import 'package:donneursang/data/items_class.dart';
 import 'package:donneursang/views/home/widgets/dot_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HomeHeaderMain extends StatefulWidget {
   const HomeHeaderMain({super.key});
@@ -86,7 +87,9 @@ class _HomeHeaderImageState extends State<HomeHeaderImage>
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Image.asset(
+      child:SvgPicture.asset( widget.items.image,
+        width: double.infinity,)
+       Image.asset(
         widget.items.image,
         width: double.infinity,
       ),
