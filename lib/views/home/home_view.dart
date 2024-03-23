@@ -1,7 +1,7 @@
 import 'package:donneursang/core/common/models/user.dart';
 import 'package:donneursang/core/commons/contain_widget.dart';
+import 'package:donneursang/views/create_request/controller/request_controller.dart';
 import 'package:donneursang/views/find_donor/donor_view.dart';
-import 'package:donneursang/views/home/controller/home_controller.dart';
 import 'package:donneursang/views/home/widgets/modules.dart';
 import 'package:donneursang/views/home/widgets/slider.dart';
 import 'package:donneursang/views/report/reportview.dart';
@@ -108,7 +108,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 ),
               ),
               const Gap(30),
-              ref.watch(getIsdoneActivateProvider).when(
+              ref.watch(getRequestDonationProvider).when(
                 data: (data) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -118,7 +118,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return ContainWidget(userModel: data[index]);
+                        return ContainWidget(userModel: data[index].usersDonor);
                       },
                       separatorBuilder: (_, __) {
                         return const SizedBox(

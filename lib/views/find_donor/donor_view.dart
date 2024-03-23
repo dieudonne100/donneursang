@@ -40,7 +40,7 @@ class _DonorViewState extends ConsumerState<DonorView> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return DonorWidget(userModel: data[index]);
+                      return DonorWidget(userModel: data[index],);
                     },
                     separatorBuilder: (_, __) {
                       return const SizedBox(

@@ -25,7 +25,6 @@ class _DonationViewState extends State<DonationView> {
     var data =
         await supabase.from('users').select().filter("isdonor", "eq", true);
     donorUser = data.map((e) => UserModel.fromMap(e)).toList();
-    print(donorUser);
   }
 
   @override

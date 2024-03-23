@@ -1,0 +1,3 @@
+
+
+ enum PayMethode {Orange,Mtn} 

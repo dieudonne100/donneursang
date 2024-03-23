@@ -14,11 +14,9 @@ class HomeHeaderMain extends StatefulWidget {
 class _HomeHeaderMainState extends State<HomeHeaderMain> {
   int activeIndex = 0;
   final List<String> homeItems = [
-    "assets/images/blood-group-compatibility.jpg",
-    "assets/images/home.png",
-    "assets/images/home.png",
-    "assets/images/home.png",
-    "assets/images/home.png",
+    "assets/blood_research_amico.svg",
+    "assets/Blood_test_pana.svg",
+    "assets/Blood_donation_amico.svg",
   ];
 
   @override

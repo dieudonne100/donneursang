@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchBarWidget extends StatelessWidget {
-  const SearchBarWidget({super.key});
+  const SearchBarWidget({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +27,28 @@ class SearchBarWidget extends StatelessWidget {
                 ),
                 const Gap(16),
                 Expanded(
-                  child: Text(
-                    "Rechercher à partir des mots clés",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.openSans(
-                      textStyle: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: Color.fromRGBO(0, 0, 0, 1)),
+                  child: TextFormField(
+                    enableInteractiveSelection: false,
+                    textAlignVertical: TextAlignVertical.center,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: "Poppins",
+                        backgroundColor: Colors.transparent),
+                    decoration: InputDecoration(
+                      hintText: "Rechercher à partir des mots clés",
+                      hintStyle: GoogleFonts.openSans(
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color.fromRGBO(0, 0, 0, 1)),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          color: Color.fromRGBO(221, 218, 218, 1),
+                        ),
+                      ),
                     ),
                   ),
                 ),

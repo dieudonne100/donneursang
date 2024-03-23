@@ -40,9 +40,7 @@ class _SearchViewState extends State<SearchView> {
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 )
-              ],
-              borderRadius: BorderRadius.circular(15), 
-              color: kWhiteColor),
+              ], borderRadius: BorderRadius.circular(15), color: kWhiteColor),
               child: Center(
                 child: ListView.separated(
                   scrollDirection: Axis.vertical,
