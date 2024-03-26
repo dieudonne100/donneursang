@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? style;
   final String? hint;
   final Widget? suffix;
+  final Widget? preffix;
   final TextStyle? hintStyle;
   final bool? enabled;
   final FocusNode? focusNode;
@@ -33,7 +34,8 @@ class CustomTextField extends StatelessWidget {
       this.inputFormatters,
       this.hasDecoration = true,
       this.readOnly = false,
-      this.onTap});
+      this.onTap,
+      this.preffix});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class CustomTextField extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: kPrimaryColor.withOpacity(0.03),
+        // color: kPrimaryColor.withOpacity(0.03),
       ),
       child: TextFormField(
         onTap: onTap,
@@ -57,6 +59,9 @@ class CustomTextField extends StatelessWidget {
         focusNode: focusNode,
         decoration: InputDecoration(
           suffixIcon: suffix,
+          prefixIcon: preffix,
+          hintStyle:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.w200),
           hintText: hint,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),

@@ -1,6 +1,7 @@
 import 'package:donneursang/views/create_request/request_view.dart';
 import 'package:donneursang/views/donation_request/donation_view.dart';
 import 'package:donneursang/views/home/home_view.dart';
+import 'package:donneursang/views/profile/edit_profile.dart';
 import 'package:donneursang/views/search/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stylish_bottom_bar/model/bar_items.dart';
@@ -136,7 +137,7 @@ class _BottomBarState extends State<BottomBar> {
             HomeView(),
             SearchView(),
             DonationView(),
-            HomeView(),
+            EditProfile(),
           ],
         ),
       ),

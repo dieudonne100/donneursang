@@ -45,6 +45,7 @@ dependencies:
   file_picker: ^8.0.0+1
   flutter_datetime_picker_plus: ^2.1.0
   timeago: ^3.6.1
+  share_it: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -63,3 +64,4 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/

@@ -97,7 +97,7 @@ class LoginController extends ChangeNotifier {
               (route) => false);
         }
       }
-    } catch (e) {
+    } catch (e, _) {
       if (context.mounted) {
         Utils.showToast(context);
       }
@@ -195,10 +195,7 @@ class LoginController extends ChangeNotifier {
             MaterialPageRoute(builder: (context) => const SignInPage()),
             (route) => false);
       }
-      // }
     } catch (e, _) {
-      print(e);
-      print(_);
       if (!context.mounted) return;
       Navigator.pop(context);
       if (!context.mounted) return;

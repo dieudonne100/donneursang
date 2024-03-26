@@ -1,7 +1,9 @@
 import 'package:donneursang/core/common/models/user.dart';
 import 'package:donneursang/core/commons/contain_widget.dart';
+import 'package:donneursang/views/campaign_details/add_campaigm.dart';
 import 'package:donneursang/views/create_request/controller/request_controller.dart';
 import 'package:donneursang/views/find_donor/donor_view.dart';
+import 'package:donneursang/views/home/widgets/drawer.dart';
 import 'package:donneursang/views/home/widgets/modules.dart';
 import 'package:donneursang/views/home/widgets/slider.dart';
 import 'package:donneursang/views/report/reportview.dart';
@@ -30,11 +32,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: const MainDrawer(),
         appBar: AppBar(
-          leading: const Icon(
-            Icons.menu,
-            size: 24,
-          ),
           actions: [
             SvgPicture.asset(
               'assets/icons/notification.svg',
@@ -91,7 +90,12 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 module(
                   icon: "assets/icons/announce.svg",
                   title: "Campaign",
-                  ontap: () {},
+                  ontap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AddCampaigm()));
+                  },
                 ),
               ]),
               const Gap(30),

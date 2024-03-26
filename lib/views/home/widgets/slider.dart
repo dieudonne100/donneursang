@@ -15,9 +15,9 @@ class HomeHeaderMain extends StatefulWidget {
 class _HomeHeaderMainState extends State<HomeHeaderMain> {
   int activeIndex = 0;
   final List<String> homeItems = [
-    "assets/blood_research_amico.svg",
-    "assets/Blood_test_pana.svg",
-    "assets/Blood_donation_amico.svg",
+    "assets/icons/blood_research_amico.svg",
+    "assets/icons/Blood_test_pana.svg",
+    "assets/icons/Blood_donation_amico.svg",
   ];
 
   @override
@@ -35,7 +35,7 @@ class _HomeHeaderMainState extends State<HomeHeaderMain> {
               options: CarouselOptions(
                 autoPlay: true,
                 viewportFraction: 1,
-                aspectRatio: 16 / 9,
+                aspectRatio: 16 / 10,
                 autoPlayInterval: const Duration(seconds: 8),
                 autoPlayAnimationDuration: const Duration(seconds: 1),
                 onPageChanged: (index, reason) =>
@@ -44,8 +44,9 @@ class _HomeHeaderMainState extends State<HomeHeaderMain> {
               itemBuilder: (context, index, realIndex) {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(homeItems[index],
-                      height: 100, width: double.infinity, fit: BoxFit.cover),
+                  child: SvgPicture.asset(homeItems[index],
+                 
+                      width: double.infinity, fit: BoxFit.cover),
                 );
               },
             ),
@@ -87,11 +88,9 @@ class _HomeHeaderImageState extends State<HomeHeaderImage>
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child:SvgPicture.asset( widget.items.image,
-        width: double.infinity,)
-       Image.asset(
+      child: SvgPicture.asset(
         widget.items.image,
-        width: double.infinity,
+      width: double.infinity, fit: BoxFit.cover
       ),
     );
   }
